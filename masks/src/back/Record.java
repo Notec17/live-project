@@ -47,7 +47,7 @@ public class Record {
     }
 
     public int GetRecord(String id,String pnumber,int n) throws SQLException {
-        if(!test.id_phnum_test(n,id,pnumber)==false||!test.id_phnum_threetime(n,id,pnumber)==false){
+        if(test.id_phnum_test(n, id, pnumber) || test.id_phnum_threetime(n, id, pnumber)){
             return 0;
         }
         return 1;

@@ -70,6 +70,7 @@ public class Lottery {
         if (rs.next()) {
             number = rs.getInt(1);
         }
+        rs.close();
         s.close();
         c.close();
         return number;
@@ -85,6 +86,7 @@ public class Lottery {
         if (rs.next()) {
             number = rs.getInt(1);
         }
+        rs.close();
         s.close();
         c.close();
         return number;
@@ -100,6 +102,9 @@ public class Lottery {
         while (rs.next()) {
             result.add(rs.getString(1));
         }
+        rs.close();
+        s.close();
+        c.close();
         return result;
     }
 
