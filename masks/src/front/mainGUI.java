@@ -37,6 +37,7 @@ public class mainGUI extends JFrame{
                 dispose();
                 new Findui();
                 //此处调用************
+                new Findui();
             }
         });
 
