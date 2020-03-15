@@ -1,4 +1,4 @@
-package font;
+package front;
 
 import javax.swing.*;
 import java.awt.*;
