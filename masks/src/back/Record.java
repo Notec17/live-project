@@ -1,11 +1,13 @@
 package back;
 
+import javax.swing.*;
 import java.sql.*;
+import java.util.UUID;
 
 public class Record {
     public String number;
     private String username="root";
-    private String password="22338447";
+    private String password="123456";
     private String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
     public String name;//姓名
     public String id;//身份证号
@@ -55,6 +57,8 @@ public class Record {
 
     public void useMessage(String id,String pnumber,String name,int count) throws SQLException{
         int ln=Lottery.getLatestN();
+        String code= UUID.randomUUID().toString().replace("-", "").toUpperCase();
+
         if(GetRecord(id,pnumber,ln)==1){
             Connection c=Connecteddatabase();
             String sql_insert="insert into booklist values(?,?,?,?,?,?,?)";
@@ -65,10 +69,14 @@ public class Record {
             ps.setString(4, pnumber);
             ps.setInt(5, count);
             ps.setInt(6, 0);
-            ps.setString(7, null);
+            ps.setString(7, code);
             ps.executeUpdate();
             ps.close();
             c.close();
+            JOptionPane.showMessageDialog(null,"您本次的预约编号为"+code,"恭喜",JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"预约失败：您已经预约过了或在前三期已经中过签，请把机会留给其他人","遗憾",JOptionPane.PLAIN_MESSAGE);
         }
         //判断是否已经登记,跳出提示框
         //判断是否在此批次前三次中签,跳出提示框

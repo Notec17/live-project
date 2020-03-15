@@ -54,6 +54,14 @@ public class orderGUI extends JFrame{
                 if(masksNumText.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "口罩数量不能为空！", "警告", JOptionPane.ERROR_MESSAGE);
                 }
+                else{
+                    Lottery a=new Lottery();
+                    try {
+                        a.setBatch(Integer.parseInt(masksNumText.getText().toString()));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
         //结束预约按钮
@@ -67,7 +75,7 @@ public class orderGUI extends JFrame{
                         ex.printStackTrace();
                     }
                 //返回主界面
-                JOptionPane.showMessageDialog(null, "不预约拉倒", "我先走一步", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "当前已结束预约", "提示", JOptionPane.ERROR_MESSAGE);
                 dispose();
                 new mainGUI();
             }

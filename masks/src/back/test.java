@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class test {
 	private static String username="root";
-	private static String password="22338447";
+	private static String password="123456";
 	private static String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
 
 	public static Connection Connecteddatabase() throws SQLException{

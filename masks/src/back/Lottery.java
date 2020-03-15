@@ -8,7 +8,7 @@ public class Lottery {
 
     public String number;
     private static String username="root";
-    private static String password="22338447";
+    private static String password="123456";
     private static String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
 
     /**
@@ -135,6 +135,5 @@ public class Lottery {
         }
         preparedStatement.close();
         c.close();
-        setBatch(n1);
     }
 }
