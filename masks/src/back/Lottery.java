@@ -2,8 +2,14 @@ package back;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public class Lottery {
+
+    public String number;
+    private String username="root";
+    private  String password="123456";
+    private String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
 
     /**
      * 获取中号的List 并且传进来的参数会处理成没有摇中的List
@@ -21,12 +27,46 @@ public class Lottery {
         return result;
     }
 
+    public static Connection Connecteddatabase() throws SQLException {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e){
+            System.out.println();
+        }
+        return DriverManager.getConnection(url,username,password);
+    }
+
+    public static void close(ResultSet rs, Statement stmt, Connection conn) {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     //获取最新批次是第几批
-    public int getLatestN() throws  SQLException {
-        Connection c = DBUtil.getConnection();
+    public static int getLatestN() throws  SQLException {
+        Connection c=Connecteddatabase();
         Statement s = c.createStatement();
-        String="select n from nlist order by n DESC limit 1";
+        String sql="select n from nlist order by n DESC limit 1";
         int number = 0;
+        ResultSet rs = s.executeQuery(sql);
         if (rs.next())
             number = rs.getInt(1);
         s.close();
@@ -35,28 +75,30 @@ public class Lottery {
     }
 
     //获取指定批次的数量
-    public int getBatchNumber(int n) throws SQLException {
-        Connection c = DBUtil.getConnection();
+    public static int getBatchNumber(int n) throws SQLException {
+        Connection c=Connecteddatabase();
         Statement s = c.createStatement();
-        String="select count from nlist where n=" + n;
+        String sql= "select count from nlist where n=" + n;
         ResultSet rs = s.executeQuery(sql);
         int number = 0;
-        if (rs.next())
+        if (rs.next()) {
             number = rs.getInt(1);
+        }
         s.close();
         c.close();
         return number;
     }
 
     //获取指定批次的人的id
-    public List<String> getId(int batch) throws SQLException {
-        Connection c = DBUtil.getConnection();
+    public static List<String> getId(int batch) throws SQLException {
+        Connection c=Connecteddatabase();
         Statement s = c.createStatement();
         String sql = "select id from booklist where n=" + batch;
         ResultSet rs = s.executeQuery(sql);
         List<String> result = new ArrayList<>();
-        while (rs.next())
+        while (rs.next()) {
             result.add(rs.getString(1));
+        }
         return result;
     }
 
@@ -67,9 +109,9 @@ public class Lottery {
         List<String> list = getId(batch);
         List<String> result = runlottery(list, num);
 
-        Connection c = DBUtil.getConnection();
+        Connection c=Connecteddatabase();
         String sql="update nlist set status=1 where id=?";
-        PreparedStatement preparedStatement = c.prepaerStatement(sql);
+        PreparedStatement preparedStatement = c.prepareStatement(sql);
         for (data : result) {
             preparedStatement.setString(1, data);
             preparedStatement.executeQuery();
