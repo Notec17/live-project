@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class orderGUI extends JFrame{
+    int x = 0;
     JPanel jp1, jp2, jp3, jp4, jp5, jp6;
     JLabel name, id, phoneNum, orderMasksNum;
     JTextField nameText, idText, phoneNumText, masksNumText;
@@ -41,7 +42,7 @@ public class orderGUI extends JFrame{
 
         startOrderButton = new JButton("开始预约");
         endOrderButton = new JButton("结束预约");
-        masksNumButton = new JButton("口罩数量");
+        masksNumButton = new JButton("下批数量");
         commitButton = new JButton("提交信息");
 
 
@@ -49,6 +50,7 @@ public class orderGUI extends JFrame{
         startOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                x=100;
                 if(masksNumText.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "口罩数量不能为空！", "警告", JOptionPane.ERROR_MESSAGE);
                 }
@@ -58,8 +60,9 @@ public class orderGUI extends JFrame{
         endOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                x=0;
                     try {
-                        Lottery.updateStatus(100);
+                        Lottery.updateStatus(Integer.parseInt(masksNumText.getText().toString()));
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -81,13 +84,18 @@ public class orderGUI extends JFrame{
         commitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                //预约函数调用
-                Record re = new Record();
-                //id pnumber name count
-                try {
-                    re.useMessage(id.getText(),phoneNum.getText(),name.getText(), Integer.parseInt(orderMasksNumBox.getSelectedItem().toString()));
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if(x!=100){
+                    JOptionPane.showMessageDialog(null, "当前不是预约时间！", "警告", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    //预约函数调用
+                    Record re = new Record();
+                    //id pnumber name count
+                    try {
+                        re.useMessage(idText.getText(),phoneNumText.getText(),nameText.getText(), Integer.parseInt(orderMasksNumBox.getSelectedItem().toString()));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
