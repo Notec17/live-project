@@ -1,6 +1,5 @@
 package back;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Record {
@@ -58,10 +57,17 @@ public class Record {
         int ln=Lottery.getLatestN();
         if(GetRecord(id,pnumber,ln)==1){
             Connection c=Connecteddatabase();
-            Statement s = c.createStatement();
-            String sql_insert="insert into booklist values("+ln+","+name+","+id+","+pnumber+","+count+")";
-            s.executeUpdate(sql_insert);
-            s.close();
+            String sql_insert="insert into booklist values(?,?,?,?,?,?,?)";
+            PreparedStatement ps = c.prepareStatement(sql_insert);
+            ps.setInt(1, ln);
+            ps.setString(2, name);
+            ps.setString(3, id);
+            ps.setString(4, pnumber);
+            ps.setInt(5, count);
+            ps.setInt(6, 0);
+            ps.setString(7, null);
+            ps.executeUpdate();
+            ps.close();
             c.close();
         }
         //判断是否已经登记,跳出提示框
