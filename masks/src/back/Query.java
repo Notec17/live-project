@@ -61,6 +61,25 @@ public class Query {
         }
     }
 
-    
+    public void Getinformation() throws SQLException {
+        String sql="select name,id,pnumber,masks from people where code=?";
+        Connection c=Connecteddatabase();
+        ResultSet rs=null;
+        PreparedStatement pstmt = null;
+        pstmt=c.prepareStatement(sql);
+        pstmt.setString(1,number);
+        rs=pstmt.executeQuery();
+        while(rs.next()){
+            this.name=rs.getString("name");
+            this.id=rs.getString("id");
+            this.pnumber=rs.getString("pnumber");
+            this.mask_number=rs.getInt("masks");
+        }
+        System.out.println(name);
+        System.out.println(id);
+        System.out.println(pnumber);
+        System.out.println(mask_number);
+
+    }
 
 }
