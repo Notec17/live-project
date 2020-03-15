@@ -43,8 +43,8 @@ public class test {
 
 	static boolean id_phnum_test(int n,String id,String phnum) throws SQLException {//n为当前批次,id为身份证号，phnum为手机号
 		Connection connection =Connecteddatabase();
-		String sql1 = "SELECT * FROM nlist WHERE n=? and id =? ";
-		String sql2 = "SELECT * FROM nlist WHERE n=? and phnum =? ";
+		String sql1 = "SELECT * FROM nList WHERE n=? and id =? ";
+		String sql2 = "SELECT * FROM nList WHERE n=? and phnum =? ";
 		PreparedStatement statement1 =connection.prepareStatement(sql1);
 		statement1.setInt(1,n);
 		statement1.setString(2,id);
@@ -72,12 +72,12 @@ public class test {
 	static boolean id_phnum_threetime(int n,String id,String phnum)throws SQLException{//n为当前批次,id为身份证号，phnum为手机号
 		Connection connection =Connecteddatabase();
 		int a=n-3,b=n-2,c=n-1;
-		String sql1 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
-		String sql2 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
-		String sql3 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
-		String sql4 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
-		String sql5 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
-		String sql6 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
+		String sql1 = "SELECT * FROM nList WHERE n=? and id =? and status=1";
+		String sql2 = "SELECT * FROM nList WHERE n=? and id =? and status=1";
+		String sql3 = "SELECT * FROM nList WHERE n=? and id =? and status=1";
+		String sql4 = "SELECT * FROM nList WHERE n=? and id =? and status=1";
+		String sql5 = "SELECT * FROM nList WHERE n=? and id =? and status=1";
+		String sql6 = "SELECT * FROM nList WHERE n=? and id =? and status=1";
 		PreparedStatement statement1 =connection.prepareStatement(sql1);
 		statement1.setInt(1,a);
 		statement1.setString(2,id);
