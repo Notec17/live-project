@@ -36,6 +36,7 @@ public class Findui extends JFrame{
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                //返回主界面
                 JOptionPane.showMessageDialog(null, "不预约拉倒", "那我要退出了", JOptionPane.ERROR_MESSAGE);
                 dispose();
                 new mainGUI();
