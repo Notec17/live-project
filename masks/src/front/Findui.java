@@ -1,5 +1,7 @@
 package front;
+
 import back.Query;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -38,7 +40,7 @@ public class Findui extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 //返回主界面
                 JOptionPane.showMessageDialog(null, "不预约拉倒", "那我要退出了", JOptionPane.ERROR_MESSAGE);
-                dispose();
+                jf.dispose();
                 new mainGUI();
             }
         });
