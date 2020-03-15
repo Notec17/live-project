@@ -20,6 +20,7 @@ public class mainGUI extends JFrame{
         order = new JButton("预约");
         query = new JButton("查询");
 
+        //调用预约GUI
         order.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -29,13 +30,14 @@ public class mainGUI extends JFrame{
             }
         });
 
-        //查询按钮，记得调用查询GUI****************
+        //调用查询GUI
         query.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //关闭窗口释放屏幕资源
                 dispose();
-                //此处调用************
+                Findui fu = new Findui();
+                fu.builldFindui();
             }
         });
 

@@ -23,20 +23,23 @@ public class Query {
 
     public static void close(ResultSet rs, Statement stmt, Connection conn) {
         try {
-            if (rs != null)
+            if (rs != null) {
                 rs.close();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            if (stmt != null)
+            if (stmt != null) {
                 stmt.close();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            if (conn != null)
+            if (conn != null) {
                 conn.close();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
