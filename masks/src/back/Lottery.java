@@ -8,7 +8,7 @@ public class Lottery {
 
     public String number;
     private static String username="root";
-    private static String password="123456";
+    private static String password="22338447";
     private static String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
 
     /**
@@ -108,21 +108,33 @@ public class Lottery {
         return result;
     }
 
+    //新增口罩批次
+    public static void setBatch(int num) throws SQLException {
+        int n = getLatestN() + 1;
+        Connection c=Connecteddatabase();
+        Statement s = c.createStatement();
+        String sql = "insert into nlist values("+n+", "+num+")";
+        s.executeUpdate(sql);
+        s.close();
+        c.close();
+    }
+
     //抽签，数据库
-    static public void updateStatus() throws SQLException {
+    static public void updateStatus(int n) throws SQLException {
         int batch = getLatestN();
         int num = getBatchNumber(batch);
         List<String> list = getId(batch);
         List<String> result = runlottery(list, num);
 
         Connection c=Connecteddatabase();
-        String sql="update nlist set status=1 where id=?";
+        String sql="update booklist set status=1 where id=?";
         PreparedStatement preparedStatement = c.prepareStatement(sql);
         for (String data : result) {
             preparedStatement.setString(1, data);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         }
         preparedStatement.close();
         c.close();
+        setBatch(n);
     }
 }

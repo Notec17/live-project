@@ -52,21 +52,17 @@ public class orderGUI extends JFrame{
                 if(masksNumText.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "口罩数量不能为空！", "警告", JOptionPane.ERROR_MESSAGE);
                 }
-                else{//此处调用摇号函数
-                    try {
-                        Lottery.updateStatus();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
             }
         });
         //结束预约按钮
         endOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                    try {
+                        Lottery.updateStatus(100);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
                 //返回主界面
                 JOptionPane.showMessageDialog(null, "不预约拉倒", "我先走一步", JOptionPane.ERROR_MESSAGE);
                 dispose();
@@ -89,7 +85,7 @@ public class orderGUI extends JFrame{
                 Record re = new Record();
                 //id pnumber name count
                 try {
-                    re.useMessage(id.getText(),phoneNum.getText(),name.getText(),Integer.parseInt(orderMasksNum.getText()));
+                    re.useMessage(id.getText(),phoneNum.getText(),name.getText(),3);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
