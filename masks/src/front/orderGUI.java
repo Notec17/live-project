@@ -7,13 +7,10 @@ import java.awt.event.ActionListener;
 
 public class orderGUI extends JFrame{
     JPanel jp1, jp2, jp3, jp4, jp5, jp6;
-    JLabel name;
-    JLabel id;
-    JLabel phoneNum;
-    JLabel orderMasksNum;
+    JLabel name, id, phoneNum, orderMasksNum;
     JTextField nameText, idText, phoneNumText, masksNumText;
     JComboBox orderMasksNumBox;
-    JButton startOrder, endOrder, commit;
+    JButton startOrderButton, endOrderButton, masksNumButton, commitButton;
     String []num ={"3","2","1"};//JComboBOX选项值
     public orderGUI(){
         jp1 = new JPanel();
@@ -38,12 +35,13 @@ public class orderGUI extends JFrame{
         masksNumText = new JTextField("100");//默认提供100个口罩
         masksNumText.setColumns(6);
 
-        startOrder = new JButton("开始预约");
-        endOrder = new JButton("结束预约");
-        commit = new JButton("口罩数量");
+        startOrderButton = new JButton("开始预约");
+        endOrderButton = new JButton("结束预约");
+        masksNumButton = new JButton("口罩数量");
+        commitButton = new JButton("提交信息");
 
         //开始预约按钮******************
-        startOrder.addActionListener(new ActionListener() {
+        startOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 //此处调用**************
@@ -51,7 +49,7 @@ public class orderGUI extends JFrame{
             }
         });
         //结束预约按钮
-        endOrder.addActionListener(new ActionListener() {
+        endOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //返回主界面
@@ -61,7 +59,7 @@ public class orderGUI extends JFrame{
             }
         });
         //口罩数量按钮
-        commit.addActionListener(new ActionListener() {
+        masksNumButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if(masksNumText.getText().trim().equals("")){
@@ -73,9 +71,16 @@ public class orderGUI extends JFrame{
 
             }
         });
+        //提交信息按钮
+        commitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //******************函数调用
+            }
+        });
 
-        //采用网格布局5行2列
-        this.setLayout(new GridLayout(6,2));
+        //采用网格布局5行3列
+        this.setLayout(new GridLayout(6,3));
 
         //此JFrame加入6个JPanel
         this.add(jp1);
@@ -85,7 +90,7 @@ public class orderGUI extends JFrame{
         this.add(jp5);
         this.add(jp6);
 
-        //总共五行2列
+        //总共五行3列
         jp1.add(name);
         jp1.add(nameText);
 
@@ -97,12 +102,13 @@ public class orderGUI extends JFrame{
 
         jp4.add(orderMasksNum);
         jp4.add(orderMasksNumBox);
+        jp4.add(commitButton);
 
-        jp5.add(commit);
+        jp5.add(masksNumButton);
         jp5.add(masksNumText);
 
-        jp6.add(startOrder);
-        jp6.add(endOrder);
+        jp6.add(startOrderButton);
+        jp6.add(endOrderButton);
 
         this.setTitle("信息录入");
         this.setSize(600,300);
