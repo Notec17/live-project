@@ -41,7 +41,7 @@ public class test {
         }
     }
 
-	static boolean id_phnum_test(int n,String id,String phnum) throws SQLException {//n为当前批次,id为身份证号，phnum为手机号
+	static boolean id_phnum_test(int n,String id,String phnum) throws SQLException {//
 		Connection connection =Connecteddatabase();
 		String sql1 = "SELECT * FROM nlist WHERE n=? and id =? ";
 		String sql2 = "SELECT * FROM nlist WHERE n=? and phnum =? ";
@@ -69,7 +69,7 @@ public class test {
 			return false;
 		}
 	}
-	static boolean id_phnum_threetime(int n,String id,String phnum)throws SQLException{//n为当前批次,id为身份证号，phnum为手机号
+	static boolean id_phnum_threetime(int n,String id,String phnum)throws SQLException{//
 		Connection connection =Connecteddatabase();
 		int a=n-3,b=n-2,c=n-1;
 		String sql1 = "SELECT * FROM nlist WHERE n=? and id =? and status=1";
@@ -123,7 +123,8 @@ public class test {
 			close(rs6,statement6,connection);
 			return true;
 		}
-		else
-		    return false;
+		else {
+			return false;
+		}
 	}
 }

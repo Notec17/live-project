@@ -46,42 +46,29 @@ public class Record {
         }
     }
 
-    public boolean GetQuery(String a) throws SQLException {
-        this.number=a;
-        String sql="select code from booklist where code=?";
+    public int GetRecord(String id,String pnumber,int n) throws SQLException {
+        if(!test.id_phnum_test(n,id,pnumber)==false||!test.id_phnum_threetime(n,id,pnumber)==false){
+            return 0;
+        }
+        return 1;
+    }
+
+    public void useMessage(String id,String pnumber,int n) throws SQLException{
+        String sql1="select n from nlist order by n DESC limit 1";
         Connection c=Connecteddatabase();
         ResultSet rs=null;
         PreparedStatement pstmt = null;
-        pstmt=c.prepareStatement(sql);
+        pstmt=c.prepareStatement(sql1);
         pstmt.setString(1,number);
         rs=pstmt.executeQuery();
-        if(rs!=null){
-            useMessage();
+        if(rs!=null&&GetRecord(id,pnumber,n)==1){
+            Getinformation();
             close(rs,pstmt,c);
             return true;
         }
         else {
             close(rs,pstmt,c);
             return false;
-        }
-    }
-
-    public void useMessage() throws SQLException{
-        String sql1="select n from nlist order by n DESC limit 1";
-        String sql2="select name,id,pnumber,count,status from booklist where code=?";
-        Connection c=Connecteddatabase();
-        ResultSet rs=null;
-        PreparedStatement pstmt1 = null;
-        PreparedStatement pstmt2 = null;
-        pstmt2=c.prepareStatement(sql2);
-        pstmt2.setString(1,number);
-        rs=pstmt2.executeQuery();
-        while(rs.next()) {
-            this.name = rs.getString("name");
-            this.id = rs.getString("id");
-            this.pnumber = rs.getString("pnumber");
-            this.mask_number = rs.getInt("count");
-            this.status = rs.getInt("status");
         }
         //判断是否已经登记,跳出提示框
         //判断是否在此批次前三次中签,跳出提示框
