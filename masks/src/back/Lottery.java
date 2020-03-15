@@ -115,7 +115,7 @@ public class Lottery {
     }
 
     //抽签，数据库
-    static public void updateStatus(int n) throws SQLException {
+    static public void updateStatus(int n1) throws SQLException {
         int batch = getLatestN();
         int num = getBatchNumber(batch);
         List<String> list = getId(batch);
@@ -130,6 +130,6 @@ public class Lottery {
         }
         preparedStatement.close();
         c.close();
-        setBatch(n);
+        setBatch(n1);
     }
 }

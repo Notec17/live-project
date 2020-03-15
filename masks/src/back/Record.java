@@ -1,5 +1,6 @@
 package back;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class Record {
@@ -57,9 +58,11 @@ public class Record {
         int ln=Lottery.getLatestN();
         if(GetRecord(id,pnumber,ln)==1){
             Connection c=Connecteddatabase();
-            String sql_insert="insert into booklist values("+"'"+ln+"'"+","+"'"+name+"'"+","+"'"+id+"'"+","+"'"+pnumber+"'"+","+"'"+count+"'"+","+")";
-            PreparedStatement ps = c.prepareStatement(sql_insert);
-            ps.executeUpdate();
+            Statement s = c.createStatement();
+            String sql_insert="insert into booklist values("+ln+","+name+","+id+","+pnumber+","+count+")";
+            s.executeUpdate(sql_insert);
+            s.close();
+            c.close();
         }
         //判断是否已经登记,跳出提示框
         //判断是否在此批次前三次中签,跳出提示框
