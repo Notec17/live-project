@@ -7,9 +7,9 @@ import java.sql.*;
 public class Lottery {
 
     public String number;
-    private String username="root";
-    private  String password="123456";
-    private String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
+    private static String username="root";
+    private static String password="123456";
+    private static String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
 
     /**
      * 获取中号的List 并且传进来的参数会处理成没有摇中的List
@@ -27,7 +27,7 @@ public class Lottery {
         return result;
     }
 
-    public  Connection Connecteddatabase() throws SQLException {
+    public static Connection Connecteddatabase() throws SQLException {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (ClassNotFoundException e){
@@ -67,8 +67,9 @@ public class Lottery {
         String sql="select n from nlist order by n DESC limit 1";
         int number = 0;
         ResultSet rs = s.executeQuery(sql);
-        if (rs.next())
+        if (rs.next()) {
             number = rs.getInt(1);
+        }
         s.close();
         c.close();
         return number;

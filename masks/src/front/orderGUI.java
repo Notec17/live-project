@@ -1,9 +1,13 @@
 package front;
 
+import back.Lottery;
+import back.Record;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class orderGUI extends JFrame{
     JPanel jp1, jp2, jp3, jp4, jp5, jp6;
@@ -40,6 +44,7 @@ public class orderGUI extends JFrame{
         masksNumButton = new JButton("口罩数量");
         commitButton = new JButton("提交信息");
 
+
         //开始预约按钮******************
         startOrderButton.addActionListener(new ActionListener() {
             @Override
@@ -47,7 +52,14 @@ public class orderGUI extends JFrame{
                 if(masksNumText.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "口罩数量不能为空！", "警告", JOptionPane.ERROR_MESSAGE);
                 }
-                //此处调用**************
+                else{//此处调用摇号函数
+                    try {
+                        Lottery.updateStatus();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
 
             }
         });
@@ -73,7 +85,14 @@ public class orderGUI extends JFrame{
         commitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                //******************函数调用
+                //预约函数调用
+                Record re = new Record();
+                //id pnumber name count
+                try {
+                    re.useMessage(id.getText(),phoneNum.getText(),name.getText(),Integer.parseInt(orderMasksNum.getText()));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

@@ -53,14 +53,22 @@ public class Record {
         return 1;
     }
 
-    public void useMessage(String id,String pnumber,int n) throws SQLException{
-        String sql1="select n from nlist order by n DESC limit 1";
-        Connection c=Connecteddatabase();
-        ResultSet rs=null;
-        PreparedStatement pstmt = null;
-        pstmt=c.prepareStatement(sql1);
-        pstmt.setString(1,number);
-        rs=pstmt.executeQuery();
+    public void useMessage(String id,String pnumber,String name,int count) throws SQLException{
+        int ln=Lottery.getLatestN();
+        if(GetRecord(id,pnumber,ln)==1){
+            Connection c = Connecteddatabase();
+            String sql_insert = "insert into booklist (n,name,id,pnumber,count,status,code) valuse(?,?,?,?,?,?,?)";
+            PreparedStatement ps = c.prepareStatement(sql_insert);
+            ps.setInt(1, ln);
+            ps.setString(2, name);
+            ps.setString(3, id);
+            ps.setString(4, pnumber);
+            ps.setInt(5, count);
+            ps.setInt(6, count);
+            ps.setString(7, null);
+            ps.executeUpdate();
+            c.close();
+        }
         //判断是否已经登记,跳出提示框
         //判断是否在此批次前三次中签,跳出提示框
         //预约成功,显示消息框
