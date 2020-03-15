@@ -85,8 +85,8 @@ public class orderGUI extends JFrame{
         this.setTitle("信息录入");
         this.setSize(600,300);
         this.setLocation(500, 100);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//设置界面和虚拟机一起关闭
         this.setVisible(true);//设置界面可显示
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);//设置界面和虚拟机一起关闭
     }
 
     public static void main(String[] args) {
