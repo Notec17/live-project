@@ -27,7 +27,7 @@ public class Lottery {
         return result;
     }
 
-    public static Connection Connecteddatabase() throws SQLException {
+    public  Connection Connecteddatabase() throws SQLException {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch (ClassNotFoundException e){
@@ -112,7 +112,7 @@ public class Lottery {
         Connection c=Connecteddatabase();
         String sql="update nlist set status=1 where id=?";
         PreparedStatement preparedStatement = c.prepareStatement(sql);
-        for (data : result) {
+        for (String data : result) {
             preparedStatement.setString(1, data);
             preparedStatement.executeQuery();
         }
