@@ -85,7 +85,7 @@ public class orderGUI extends JFrame{
                 Record re = new Record();
                 //id pnumber name count
                 try {
-                    re.useMessage(id.getText(),phoneNum.getText(),name.getText(),3);
+                    re.useMessage(idText.getText(),phoneNumText.getText(),nameText.getText(),3);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
