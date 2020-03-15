@@ -5,7 +5,7 @@ import java.sql.*;
 public class Query {
     public String number;
     private String username="root";
-    private  String password="123456";
+    private  String password="22338447";
     private String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
     public String name;//姓名
     public String id;//身份证号

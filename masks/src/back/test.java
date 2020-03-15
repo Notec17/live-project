@@ -10,12 +10,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class test {
-	private static String username ="root";
-	private static String password ="123456";
-	private static String url ="jdbc:mysql://localhost:3306/D6plus";
+	private static String username="root";
+	private static String password="22338447";
+	private static String url="jdbc:mysql://localhost:3306/d6plus?serverTimezone=GMT";
+
 	public static Connection Connecteddatabase() throws SQLException{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e){
 			System.out.println();
 		}
@@ -23,29 +24,32 @@ public class test {
 	}
 	public static void close(ResultSet rs, Statement stmt, Connection conn) {
         try {
-            if (rs != null)
-                rs.close();
+            if (rs != null) {
+				rs.close();
+			}
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            if (stmt != null)
-                stmt.close();
+            if (stmt != null) {
+				stmt.close();
+			}
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         try {
-            if (conn != null)
-                conn.close();
+            if (conn != null) {
+				conn.close();
+			}
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-	static boolean id_phnum_test(int n,String id,String phnum) throws SQLException {//nΪ��ǰ����,idΪ���֤�ţ�phnumΪ�ֻ���
+	static boolean id_phnum_test(int n,String id,String phnum) throws SQLException {
 		Connection connection =Connecteddatabase();
 		String sql1 = "SELECT * FROM bookList WHERE n=? and id =? ";
-		String sql2 = "SELECT * FROM bookList WHERE n=? and phnum =? ";
+		String sql2 = "SELECT * FROM bookList WHERE n=? and pnumber =? ";
 		PreparedStatement statement1 =connection.prepareStatement(sql1);
 		statement1.setInt(1,n);
 		statement1.setString(2,id);
@@ -70,15 +74,15 @@ public class test {
 			return false;
 		}
 	}
-	static boolean id_phnum_threetime(int n,String id,String phnum)throws SQLException{//nΪ��ǰ����,idΪ���֤�ţ�phnumΪ�ֻ���
+	static boolean id_phnum_threetime(int n,String id,String phnum)throws SQLException{
 		Connection connection =Connecteddatabase();
 		int a=n-3,b=n-2,c=n-1;
 		String sql1 = "SELECT * FROM bookList WHERE n=? and id =? and status=1";
-		String sql2 = "SELECT * FROM bookList WHERE n=? and id =? and status=1";
+		String sql2 = "SELECT * FROM bookList WHERE n=? and pnumber =? and status=1";
 		String sql3 = "SELECT * FROM bookList WHERE n=? and id =? and status=1";
-		String sql4 = "SELECT * FROM bookList WHERE n=? and id =? and status=1";
+		String sql4 = "SELECT * FROM bookList WHERE n=? and pnumber =? and status=1";
 		String sql5 = "SELECT * FROM bookList WHERE n=? and id =? and status=1";
-		String sql6 = "SELECT * FROM bookList WHERE n=? and id =? and status=1";
+		String sql6 = "SELECT * FROM bookList WHERE n=? and pnumber =? and status=1";
 		PreparedStatement statement1 =connection.prepareStatement(sql1);
 		statement1.setInt(1,a);
 		statement1.setString(2,id);
