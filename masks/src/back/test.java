@@ -125,6 +125,14 @@ public class test {
 			return true;
 		}
 		else
-		    return false;
+		{
+			close(rs1,statement1,connection);
+			close(rs2,statement2,connection);
+			close(rs3,statement3,connection);
+			close(rs4,statement4,connection);
+			close(rs5,statement5,connection);
+			close(rs6,statement6,connection);
+		    return false;}
+		
 	}
 }
