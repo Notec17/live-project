@@ -11,7 +11,7 @@ public class Lottery {
      * @param num 摇号的数量
      * @return
      */
-    static List<String> Runlottery(List<String> list, int num) {
+    static List<String> runlottery(List<String> list, int num) {
         List<String> result = new ArrayList<>();
         while (num-- > 0 && list.size() > 0) {
             int index = (int)(Math.random() * list.size());
