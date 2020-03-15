@@ -35,6 +35,7 @@ public class mainGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 //关闭窗口释放屏幕资源
                 dispose();
+                new Findui();
                 //此处调用************
                 new Findui();
             }
