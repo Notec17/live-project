@@ -1,9 +1,10 @@
 package front;
-
+import back.Query;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Findui {
     public void builldFindui() {
@@ -25,11 +26,17 @@ public class Findui {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doit(textField.getText());
+                try {
+                    doit(textField.getText());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 System.out.println("查询: " + textField.getText());
             }
 
-            private void doit(String text) {
+            private void doit(String text) throws SQLException {
+                Query a=new Query();
+                a.GetQuery(text);
                 System.out.println("hhhhh");
             }
         });
