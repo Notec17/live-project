@@ -39,17 +39,16 @@ public class Findui {
                 }
                 System.out.println("查询: " + textField.getText());
             }
-
             private void doit(String text) throws SQLException {
-                Query a=new Query();
+                Query a = new Query();
                 a.GetQuery(text);
-                System.out.println("hhhhh");
-            private void doit(String text) {
-                //查询操作完成后调用display展示预约详情
-                //
-                //
-                //
-                Display("张三","350582199810175519","15905926688",50);
+                if (a.status == 1) {
+                    Display(a.name, a.id, a.pnumber, a.mask_number);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"您这次预约好像妹有中签哦，真是有够好笑的呢","遗憾",JOptionPane.PLAIN_MESSAGE);
+
+                }
             }
             //name shenfen shouji kouzhao
             private void Display(String name,String shenfen,String shouji,int kouzhao) {
