@@ -1,9 +1,10 @@
 package front;
-
+import back.Query;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Findui extends JFrame{
     public static void main(String[] args) throws AWTException {
@@ -44,16 +45,23 @@ public class Findui extends JFrame{
             @Override
             //鼠标点击查询后文本框内容传入doit（）进行查询
             public void actionPerformed(ActionEvent e) {
-                doit(textField.getText());
+                try {
+                    doit(textField.getText());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 System.out.println("查询: " + textField.getText());
             }
+            private void doit(String text) throws SQLException {
+                Query a = new Query();
+                a.GetQuery(text);
+                if (a.status == 1) {
+                    Display(a.name, a.id, a.pnumber, a.mask_number);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"您这次预约好像妹有中签哦，真是有够好笑的呢","遗憾",JOptionPane.PLAIN_MESSAGE);
 
-            private void doit(String text) {
-                //查询操作完成后调用display展示预约详情
-                //
-                //
-                //
-                Display("张三","350582199810175519","15905926688",50);
+                }
             }
             //name shenfen shouji kouzhao
             private void Display(String name,String shenfen,String shouji,int kouzhao) {
