@@ -39,7 +39,7 @@ public class Findui extends JFrame{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //返回主界面
-                JOptionPane.showMessageDialog(null, "不预约拉倒", "那我要退出了", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "即将退出查询界面", "警告", JOptionPane.ERROR_MESSAGE);
                 jf.dispose();
                 new mainGUI();
             }
@@ -62,7 +62,7 @@ public class Findui extends JFrame{
                     Display(a.name, a.id, a.pnumber, a.mask_number);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"您这次预约好像妹有中签哦，真是有够好笑的呢","遗憾",JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"当前尚未有中签记录!","遗憾",JOptionPane.PLAIN_MESSAGE);
 
                 }
             }
