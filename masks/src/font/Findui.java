@@ -6,8 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Findui {
-
-    public static void main(String[] args) throws AWTException {
+    public void builldFindui() {
         JFrame jf = new JFrame("查询窗口");
         jf.setSize(300, 300);
         jf.setLocationRelativeTo(null);
@@ -26,13 +25,22 @@ public class Findui {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                doit(textField.getText());
                 System.out.println("查询: " + textField.getText());
+            }
+
+            private void doit(String text) {
+                System.out.println("hhhhh");
             }
         });
         panel.add(btn);
 
         jf.setContentPane(panel);
         jf.setVisible(true);
+    }
+    public static void main(String[] args) throws AWTException {
+       Findui Find=new Findui();
+       Find.builldFindui();
     }
 
 }
