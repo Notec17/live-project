@@ -61,15 +61,6 @@ public class Record {
         pstmt=c.prepareStatement(sql1);
         pstmt.setString(1,number);
         rs=pstmt.executeQuery();
-        if(rs!=null&&GetRecord(id,pnumber,n)==1){
-            Getinformation();
-            close(rs,pstmt,c);
-            return true;
-        }
-        else {
-            close(rs,pstmt,c);
-            return false;
-        }
         //判断是否已经登记,跳出提示框
         //判断是否在此批次前三次中签,跳出提示框
         //预约成功,显示消息框

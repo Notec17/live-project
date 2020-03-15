@@ -44,6 +44,9 @@ public class orderGUI extends JFrame{
         startOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                if(masksNumText.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "口罩数量不能为空！", "警告", JOptionPane.ERROR_MESSAGE);
+                }
                 //此处调用**************
 
             }
@@ -62,12 +65,7 @@ public class orderGUI extends JFrame{
         masksNumButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                if(masksNumText.getText().trim().equals("")){
-                    JOptionPane.showMessageDialog(null, "你要凉了，没口罩预约了", "我先走一步", JOptionPane.ERROR_MESSAGE);
-                }
-                else{
                     //这里调用函数*************
-                }
 
             }
         });
