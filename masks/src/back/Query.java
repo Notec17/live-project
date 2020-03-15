@@ -41,5 +41,26 @@ public class Query {
             ex.printStackTrace();
         }
     }
+    public boolean GetQuery(String a) throws SQLException {
+        this.number=a;
+        String sql="select code from masklist where code=?";
+        Connection c=Connecteddatabase();
+        ResultSet rs=null;
+        PreparedStatement pstmt = null;
+        pstmt=c.prepareStatement(sql);
+        pstmt.setString(1,number);
+        rs=pstmt.executeQuery();
+        if(rs!=null){
+            Getinformation();
+            close(rs,pstmt,c);
+            return true;
+        }
+        else {
+            close(rs,pstmt,c);
+            return false;
+        }
+    }
+
     
+
 }
